@@ -1,4 +1,13 @@
 appId: com.flightmock
 ---
 - launchApp
-- assertVisible: "FlightMock ✈️"
+- assertVisible: "Search Flights"
+- tapOn: "Origin"
+- inputText: "CMH"
+- tapOn: "Destination"
+- inputText: "JFK"
+- tapOn: "Departure Date"
+- inputText: "2026-07-01"
+- tapOn: "Search"
+- assertVisible: "Available Flights"
+- assertVisible: "CMH → JFK"
