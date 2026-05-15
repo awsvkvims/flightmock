@@ -1,0 +1,4 @@
+appId: com.flightmock
+---
+- launchApp
+- assertVisible: "FlightMock ✈️"
