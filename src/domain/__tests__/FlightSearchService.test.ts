@@ -8,6 +8,14 @@ describe('FlightSearchService', () => {
     search: jest.fn().mockResolvedValue([]),
   };
 
+  const baseQuery = {
+    origin: 'CMH',
+    destination: 'JFK',
+    departureDate: new Date('2026-07-01'),
+    passengers: 1,
+    cabinClass: 'economy',
+  };
+
   it('should be instantiable', () => {
     const service = new FlightSearchService(emptyRepository);
     expect(service).toBeDefined();
@@ -16,13 +24,7 @@ describe('FlightSearchService', () => {
   it('should return empty array when no flights are available', async () => {
     const service = new FlightSearchService(emptyRepository);
 
-    const query: SearchQuery = {
-      origin: 'CMH',
-      destination: 'JFK',
-      departureDate: new Date('2026-07-01'),
-      passengers: 1,
-      cabinClass: 'economy',
-    };
+    const query: SearchQuery = baseQuery;
 
     const result = await service.search(query);
     expect(result).toEqual([]);
@@ -75,5 +77,30 @@ describe('FlightSearchService', () => {
     expect(result[0].id).toBe('1');
     expect(result[0].price).toBe(299);
     expect(mockRepository.search).toHaveBeenCalledWith(query);
+  });
+
+  it('should throw ValidationError if the origin is missing', async () => {
+    const service = new FlightSearchService(emptyRepository);
+
+    const query: SearchQuery = { ...baseQuery, origin: '' };
+
+    await expect(service.search(query)).rejects.toThrow('Missing required fields: origin');
+  });
+
+  it('should throw ValidationError if the destination is missing', async () => {
+    const service = new FlightSearchService(emptyRepository);
+
+    const query: SearchQuery = { ...baseQuery, destination: '' };
+
+    await expect(service.search(query)).rejects.toThrow('Missing required fields: destination');
+  });
+  it('should throw ValidationError if both origin and destination are missing', async () => {
+    const service = new FlightSearchService(emptyRepository);
+
+    const query: SearchQuery = { ...baseQuery, origin: '', destination: '' };
+
+    await expect(service.search(query)).rejects.toThrow(
+      'Missing required fields: origin, destination'
+    );
   });
 });
