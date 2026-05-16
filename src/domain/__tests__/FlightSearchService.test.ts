@@ -1,5 +1,5 @@
 import { FlightRepository } from '../../repositories/FlightRepository';
-import { Flight, SearchQuery } from '../../types/flights';
+import { Flight, SearchQuery } from '../../types/flight';
 import { FlightSearchService } from '../FlightSearchService';
 
 describe('FlightSearchService', () => {

@@ -1,4 +1,4 @@
-import { Flight, SearchQuery } from '../types/flights';
+import { Flight, SearchQuery } from '../types/flight';
 import { FlightRepository } from '../repositories/FlightRepository';
 
 export class FlightSearchService {
