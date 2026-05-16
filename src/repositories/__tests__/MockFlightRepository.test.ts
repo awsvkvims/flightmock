@@ -7,6 +7,9 @@ describe('MockFlightRepository', () => {
     const query: SearchQuery = {
       origin: 'CMH',
       destination: 'JFK',
+      departureDate: new Date('2026-07-01'),
+      passengers: 1,
+      cabinClass: 'economy',
     };
 
     const results = await repository.search(query);
@@ -20,6 +23,9 @@ describe('MockFlightRepository', () => {
     const query: SearchQuery = {
       origin: 'LAX',
       destination: 'ORD',
+      departureDate: new Date('2026-07-01'),
+      passengers: 1,
+      cabinClass: 'economy',
     };
 
     const results = await repository.search(query);

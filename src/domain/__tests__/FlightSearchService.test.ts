@@ -9,7 +9,7 @@ describe('FlightSearchService', () => {
     search: jest.fn().mockResolvedValue([]),
   };
 
-  const baseQuery = {
+  const baseQuery: SearchQuery = {
     origin: 'CMH',
     destination: 'JFK',
     departureDate: new Date('2026-07-01'),
