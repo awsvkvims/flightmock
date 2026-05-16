@@ -7,7 +7,12 @@ export class FlightSearchService {
 
   async search(query: SearchQuery): Promise<Flight[]> {
     this.validate(query);
-    return this.repository.search(query);
+    const flights = await this.repository.search(query);
+    return this.sortByPrice(flights);
+  }
+
+  private sortByPrice(flights: Flight[]): Flight[] {
+    return [...flights].sort((a, b) => a.price - b.price);
   }
 
   private validate(query: SearchQuery): void {

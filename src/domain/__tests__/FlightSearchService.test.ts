@@ -1,3 +1,4 @@
+import { MockFlightRepository } from '../../repositories/__mocks__/MockFlightRepository';
 import { FlightRepository } from '../../repositories/FlightRepository';
 import { Flight, SearchQuery } from '../../types/flight';
 import { FlightSearchService } from '../FlightSearchService';
@@ -102,5 +103,18 @@ describe('FlightSearchService', () => {
     await expect(service.search(query)).rejects.toThrow(
       'Missing required fields: origin, destination'
     );
+  });
+
+  it('should return flights sorted by price ascending', async () => {
+    const flightRepository: MockFlightRepository = new MockFlightRepository();
+    const service = new FlightSearchService(flightRepository);
+
+    const query: SearchQuery = baseQuery;
+
+    const results = await service.search(query);
+    expect(results).toHaveLength(3);
+    expect(results[0].price).toBe(189); // cheapest flight first
+    expect(results[1].price).toBe(249);
+    expect(results[2].price).toBe(299); // most expensive flight last
   });
 });
