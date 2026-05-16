@@ -1,7 +1,10 @@
-import { SearchQuery, Flight } from '../types/flights';
+import { Flight, SearchQuery } from '../types/flights';
+import { FlightRepository } from '../repositories/FlightRepository';
 
 export class FlightSearchService {
-  async search(_query: SearchQuery): Promise<Flight[]> {
-    return [];
+  constructor(private repository: FlightRepository) {}
+
+  async search(query: SearchQuery): Promise<Flight[]> {
+    return this.repository.search(query);
   }
 }
