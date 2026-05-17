@@ -26,6 +26,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "93693c57-99c7-457f-a429-333b03275df2"
+      }
+    },
+    "owner": "vimsco"
   }
 }
