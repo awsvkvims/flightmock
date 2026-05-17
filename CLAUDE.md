@@ -172,3 +172,12 @@ This project follows strict TDD. Claude must respect the sequence:
 - ⬜ Results screen UI
 - ⬜ GitHub Actions CI
 - ⬜ EAS CD pipeline
+
+### Known Architecture Improvement
+
+App.tsx currently acts as composition root — wiring repository
+and service directly. Next refactor:
+
+- Extract to src/composition/ServiceLocator.ts
+- Or introduce React Context for service injection
+- Coaching talking point: where does dependency wiring belong?
