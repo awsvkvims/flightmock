@@ -32,6 +32,12 @@
         "projectId": "93693c57-99c7-457f-a429-333b03275df2"
       }
     },
-    "owner": "vimsco"
+    "owner": "vimsco",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/93693c57-99c7-457f-a429-333b03275df2"
+    }
   }
 }
