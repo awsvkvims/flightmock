@@ -49,6 +49,7 @@ describe('FlightSearchService', () => {
       airline: {
         code: 'AA',
         name: 'American Airlines',
+        isBudget: false,
       },
       departureTime: new Date('2026-07-01T08:00:00Z'),
       arrivalTime: new Date('2026-07-01T10:30:00Z'),

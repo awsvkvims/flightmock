@@ -19,6 +19,7 @@ const mockFlights: Flight[] = [
     airline: {
       code: 'AA',
       name: 'American Airlines',
+      isBudget: false,
     },
     departureTime: new Date('2026-07-01T08:00:00Z'),
     arrivalTime: new Date('2026-07-01T10:30:00Z'),
@@ -44,6 +45,7 @@ const mockFlights: Flight[] = [
     airline: {
       code: 'UA',
       name: 'United Airlines',
+      isBudget: false,
     },
     departureTime: new Date('2026-07-01T11:00:00Z'),
     arrivalTime: new Date('2026-07-01T13:45:00Z'),
@@ -69,6 +71,7 @@ const mockFlights: Flight[] = [
     airline: {
       code: 'DL',
       name: 'Delta Airlines',
+      isBudget: true,
     },
     departureTime: new Date('2026-07-01T15:30:00Z'),
     arrivalTime: new Date('2026-07-01T18:00:00Z'),

@@ -12,6 +12,7 @@ export interface Airport {
 export interface Airline {
   code: string; // e.g. "BA", "AA"
   name: string; // e.g. "British Airways"
+  isBudget: boolean;
 }
 
 export interface Flight {
