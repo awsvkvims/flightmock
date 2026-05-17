@@ -12,4 +12,20 @@ describe('SearchScreen', () => {
     expect(screen.getByPlaceholderText('Departure Date')).toBeTruthy();
     expect(screen.getByText('Search')).toBeTruthy();
   });
+
+  it('should call onSearch with the entered values when Search is tapped', () => {
+    const onSearch = jest.fn();
+    render(<SearchScreen onSearch={onSearch} />);
+
+    fireEvent.changeText(screen.getByPlaceholderText('Origin'), 'CMH');
+    fireEvent.changeText(screen.getByPlaceholderText('Destination'), 'JFK');
+    fireEvent.changeText(screen.getByPlaceholderText('Departure Date'), '2026-07-01');
+    fireEvent.press(screen.getByText('Search'));
+
+    expect(onSearch).toHaveBeenCalledWith({
+      origin: 'CMH',
+      destination: 'JFK',
+      departureDate: '2026-07-01',
+    });
+  });
 });

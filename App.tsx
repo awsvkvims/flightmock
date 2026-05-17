@@ -1,11 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { SearchScreen } from './src/screens/SearchScreen';
 
 export default function App() {
+  const [searchMessage, setSearchMessage] = useState('');
+
+  const handleSearch = (query: { origin: string; destination: string; departureDate: string }) => {
+    setSearchMessage(
+      `Flight search from ${query.origin} → ${query.destination} on ${query.departureDate} will be available soon.`
+    );
+  };
+
   return (
     <View style={styles.container}>
-      <Text>FlightMock ✈️</Text>
-      <StatusBar style="auto" />
+      <SearchScreen onSearch={handleSearch} />
+      {searchMessage ? <Text>{searchMessage}</Text> : null}
     </View>
   );
 }
@@ -13,8 +22,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 60,
+    paddingHorizontal: 20,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
