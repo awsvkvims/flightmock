@@ -4,7 +4,7 @@ import { SearchScreen } from '../SearchScreen';
 
 describe('SearchScreen', () => {
   it('should render the search form with all required fields', () => {
-    render(<SearchScreen />);
+    render(<SearchScreen onSearch={jest.fn()} />);
 
     expect(screen.getByText('Search Flights')).toBeTruthy();
     expect(screen.getByPlaceholderText('Origin')).toBeTruthy();
