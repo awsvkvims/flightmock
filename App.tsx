@@ -28,7 +28,7 @@ export default function App() {
       });
       setFlights(results);
       setHasSearched(true);
-    } catch (error) {
+    } catch {
       setFlights([]);
       setHasSearched(true);
     }
