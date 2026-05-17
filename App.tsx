@@ -1,20 +1,43 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { SearchScreen } from './src/screens/SearchScreen';
+import { ResultsScreen } from './src/screens/ResultsScreen';
+import { FlightSearchService } from './src/domain/FlightSearchService';
+import { MockFlightRepository } from './src/repositories/__mocks__/MockFlightRepository';
+import { Flight } from './src/types/flight';
+
+const repository = new MockFlightRepository();
+const searchService = new FlightSearchService(repository);
 
 export default function App() {
-  const [searchMessage, setSearchMessage] = useState('');
+  const [flights, setFlights] = useState<Flight[]>([]);
+  const [hasSearched, setHasSearched] = useState(false);
 
-  const handleSearch = (query: { origin: string; destination: string; departureDate: string }) => {
-    setSearchMessage(
-      `Flight search from ${query.origin} → ${query.destination} on ${query.departureDate} will be available soon.`
-    );
+  const handleSearch = async (query: {
+    origin: string;
+    destination: string;
+    departureDate: string;
+  }) => {
+    try {
+      const results = await searchService.search({
+        origin: query.origin,
+        destination: query.destination,
+        departureDate: new Date(query.departureDate),
+        passengers: 1,
+        cabinClass: 'economy',
+      });
+      setFlights(results);
+      setHasSearched(true);
+    } catch (error) {
+      setFlights([]);
+      setHasSearched(true);
+    }
   };
 
   return (
     <View style={styles.container}>
       <SearchScreen onSearch={handleSearch} />
-      {searchMessage ? <Text>{searchMessage}</Text> : null}
+      {hasSearched && <ResultsScreen flights={flights} />}
     </View>
   );
 }
